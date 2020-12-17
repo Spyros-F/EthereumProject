@@ -12,16 +12,22 @@ const abi = require('./abi.js');
 const contract = new web3.eth.Contract(abi, contractAddress);
 
 contract.methods.name().call((err, result) => {
-  console.log('name:', result);
+  const name = result;
 });
 
 contract.methods.symbol().call((err, result) => {
-  console.log('symbol:', result);
+  const symbol = result;
 });
 
 contract.methods.decimals().call((err, result) => {
-  console.log('decimals:', result);
+  const decimals = result;
 });
+
+const fromArray = [];
+
+const toArray = [];
+
+const valueArray = [];
 
 contract.getPastEvents(
   'Transfer',
@@ -32,9 +38,9 @@ contract.getPastEvents(
   (err, events) => {
     const transfers = events.map((e) => e.returnValues);
     transfers.forEach((transfer) => {
-      console.log('from:', transfer.from);
-      console.log('to:', transfer.to);
-      console.log('value:', transfer.value);
+      fromArray.push(transfer.from);
+      toArray.push(transfer.to);
+      valueArray.push(transfer.value);
     });
   }
 );

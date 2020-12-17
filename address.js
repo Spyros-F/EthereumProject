@@ -14,7 +14,6 @@ const contractAddress = '0xf019a9c291fab47003588fe74d33660cd467fc22';
 const abi = require('./abi.js');
 const contract = new web3.eth.Contract(abi, contractAddress);
 
-
 class ResponseData {
   constructor(from, to, value) {
     this.from = from;
@@ -24,9 +23,8 @@ class ResponseData {
 }
 
 router.get('/addresses/:ethAddress/transactions', async (ctx, next) => {
-  const addressParam = Object.values(ctx.params).toString(); // address we get from url for task4
-  const ResponseArr = [];
-  console.log(addressParam);
+  const addressParam = Object.values(ctx.params).toString();
+  const responseArr = [];
   if (web3.utils.toChecksumAddress(addressParam)) {
     await contract.getPastEvents(
       'Transfer',
@@ -39,13 +37,13 @@ router.get('/addresses/:ethAddress/transactions', async (ctx, next) => {
         transfers.forEach((transfer) => {
           if (transfer.from === addressParam || transfer.to === addressParam) {
             const responseData = new ResponseData(transfer.from, transfer.to, transfer.value);
-            ResponseArr.push(responseData);
+            responseArr.push(responseData);
           }
         });
       }
     ).then(function(events){
       ctx.response.status = 202;
-      ctx.body = ResponseArr;
+      ctx.body = responseArr;
     });
   } else {
     ctx.response.status = 404;
