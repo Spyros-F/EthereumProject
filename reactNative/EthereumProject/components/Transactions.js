@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {connect} from 'react-redux';
-import { Table, Row, Rows } from 'react-native-table-component'
+import {Table, Row, Rows} from 'react-native-table-component'
 
 class Transactions extends Component {
 
