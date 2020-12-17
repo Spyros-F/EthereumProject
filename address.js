@@ -26,7 +26,7 @@ router.get('/addresses/:ethAddress/transactions', async (ctx, next) => {
   const addressParam = Object.values(ctx.params).toString();
   const responseArr = [];
   if (web3.utils.toChecksumAddress(addressParam)) {
-    await contract.getPastEvents(
+     await contract.getPastEvents(
       'Transfer',
       {
         fromBlock: 0,
@@ -41,10 +41,9 @@ router.get('/addresses/:ethAddress/transactions', async (ctx, next) => {
           }
         });
       }
-    ).then(function(events){
-      ctx.response.status = 202;
-      ctx.body = responseArr;
-    });
+    )
+    ctx.response.status = 202;
+    ctx.body = responseArr;
   } else {
     ctx.response.status = 404;
     ctx.body = 'Wrong Eth Address';
