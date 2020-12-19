@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {Table, Row, Rows} from 'react-native-table-component'
+import {API_URL} from '@env'
 
 class Transactions extends Component {
 
@@ -22,7 +23,8 @@ class Transactions extends Component {
     // 'http://192.168.1.4:8080/addresses/0xF7b547f3E46EFfB3480EEE2c486AE760734B135c/transactions'
     //you need to change the ip to be the on that shows your localhost
     // in cmd you type ipconfig and you get IPv4 Address.
-    const url = 'http://192.168.1.4:8080/addresses/'+this.props.route.params.address+'/transactions';
+    const url = `${API_URL}/addresses/${this.props.route.params.address}/transactions`
+  
     fetch(url
       ,
       {
