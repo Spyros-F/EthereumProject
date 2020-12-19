@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {Table, Row, Rows} from 'react-native-table-component'
 import {API_URL} from '@env'
+import {styles} from './style'
 
 class Transactions extends Component {
 
@@ -49,14 +50,15 @@ class Transactions extends Component {
 
   render() {
     const tableData = [];
+
     const tableHead = ['From', 'To', 'Value'];
-    for (let i in this.state.transactionDataList) {
-      let temp = [];
-      for (let j in this.state.transactionDataList[i]) {
-        temp.push(this.state.transactionDataList[i][j]);
-      }
-      tableData.push(temp);
+
+    const temp = this.state.transactionDataList.flatMap((e) => [e.from,e.to,e.value]);
+
+    while(temp.length) {
+      tableData.push(temp.splice(0,3));
     }
+    
     if (this.state.transactionDataListLength > 0) {
       return (
         <View>
@@ -66,28 +68,19 @@ class Transactions extends Component {
           </Table>
         </View>
       );
-    } else if (this.state.transactionDataListLength === 0){
-      return (
-        <View>
+     } else if (this.state.transactionDataListLength === 0) {
+       return (
+         <View>
           <Text>The Ethereum address that you searched has no transaction!</Text>
         </View>
       )
     } else {
       return null;
-    }
-    
+    }   
   }
 }
 
-const styles = StyleSheet.create({
-  head: { 
-    backgroundColor: '#D3D3D3',
-    alignItems: 'center'
-  },
-  row: {
-    backgroundColor: '#FFFFFF',
-   }
-})
+
  
 const mapStateToProps = (state) => {
   const {transactions} = state;

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {styles} from './style'
 import {
   View,
   Text,
   TouchableOpacity,
   TextInput,
-  StyleSheet,
 } from 'react-native';
 
 class Home extends Component {
@@ -51,24 +51,3 @@ const mapStateToProps = (state) => {
 };
  
 export default connect(mapStateToProps)(Home);
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 23,
-  },
-  input: {
-    margin: 15,
-    height: 40,
-    borderColor: '#7a42f4',
-    borderWidth: 1,
-  },
-  searchButton: {
-    backgroundColor: '#7a42f4',
-    padding: 10,
-    margin: 15,
-    height: 40,
-  },
-  searchButtonText: {
-    color: 'white',
-  },
-});
