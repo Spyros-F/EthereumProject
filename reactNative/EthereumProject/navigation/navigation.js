@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import Home from './components/Home/Home';
-import Transactions from './components/Transactions/Transactions';
+import Home from '../components/Home/home';
+import Transactions from '../components/Transactions/transactions';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
