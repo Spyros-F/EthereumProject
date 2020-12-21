@@ -5,7 +5,7 @@ const app = new Koa();
 
 app.use(koaBody());
 
-let address = require('./address.js');
+const address = require('../address.js');
 
 app.use(address.routes());
 
