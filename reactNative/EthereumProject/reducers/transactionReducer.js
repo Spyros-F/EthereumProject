@@ -1,15 +1,16 @@
+import {SELECT_TRANSACTION} from '../actions/types'
 import {combineReducers} from 'redux';
- 
-const INITIAL_STATE = {
-  current: [],
-  all_transactions: [
-    'Transactions',
-  ],
+
+const initialState = {
+    current: [],
+    all_transactions: [
+      'Transactions',
+    ],
 };
- 
-const transactionsReducer = (state = INITIAL_STATE, action) => {
+
+const transactionsReducer = (state = initialState, action) => {
     switch (action.type) {
-      case 'SELECT_TRANSACTION':
+      case SELECT_TRANSACTION:
         
         const { current,  all_transactions,} = state;
       
@@ -24,8 +25,8 @@ const transactionsReducer = (state = INITIAL_STATE, action) => {
       default:
         return state
     }
-  };
- 
+};
+
 export default combineReducers({
     transactions: transactionsReducer
 });
